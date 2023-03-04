@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buscar Documento</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+  </head>
+  <style>
+    #menu .campo {
+      margin-right: 10px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      color: #000000;
+    }
+    #menu {
+      margin-left: 500px;
+      padding: 3px;
+      min-width: 1250px;
+      background: url(../images/d.jpg);
+    }
+    #results {
+      margin-top: 20px;
+      background-color: #f0f0f0;
+    }
+    #results div {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    #results span.highlighted {
+      background-color: yellow;
+    }
+
+    #results a {
+      margin-top: 10px;
+      display: inline-block;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4caf50;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    #results a:hover {
+      background-color: #3e8e41;
+    }
+  </style>
+  <body>
+    <div id="menu">
+      <label for="search-options">Search Options:</label>
+      <select class="campo" id="search-options">
+        <option value="title">Titulo</option>
+        <option value="content">Contenido</option>
+        <option value="file">Fichero</option>
+        <option value="authorname">Autor</option>
+      </select>
+      <label for="search-term">Search:</label>
+      <input class="campo" type="text" id="search-term" />
+      <input type="button" value="Search" onclick="search()" />
+      <input type="button" value="Volver" onclick="volver()" />
+    </div>
+
+    <div id="results"></div>
+    <script>
+      function search() {
+  var searchTerm = document.getElementById("search-term").value;
+  var searchOption = document.getElementById("search-options").value;
+  var resultsDiv = document.getElementById("results");
+
+  // Encode data using URLSearchParams
+  var formData = new URLSearchParams();
+  formData.append("searchTerm", searchTerm);
+  formData.append("searchOption", searchOption);
+
+  fetch(
+    "https://www.informaticasc.com/curso22_23/salamaDM/DOCS/phpTodo/SearchDoc.php",
+    {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      // Build an HTML string to display the search results
+      var resultsHTML = "";
+      data.searchResults.forEach((result) => {
+        // Extract filename from file path
+        var fileName = result.file.split("/").pop();
+        var highlightedTitle = result.title.replace(
+          new RegExp(searchTerm, "gi"),
+          "<span class='highlighted'>$&</span>"
+        );
+        var highlightedContent = result.content.replace(
+          new RegExp(searchTerm, "gi"),
+          "<span class='highlighted'>$&</span>"
+        );
+        var resultHTML = `
+          <div>
+            <span>${highlightedTitle}</span>
+            <p>${highlightedContent}</p>
+            <p>Filename: ${fileName}</p>
+            <a href='${result.file}'>Download File</a>
+          </div>
+        `;
+        if (result.authorname) {
+          var highlightedAuthorName = result.authorname.replace(
+            new RegExp(searchTerm, "gi"),
+            "<span class='highlighted'>$&</span>"
+          );
+          resultHTML += `<p>Author: ${highlightedAuthorName}</p>`;
+        }
+        resultsHTML += resultHTML;
+      });
+      resultsDiv.innerHTML = resultsHTML;
+    })
+    .catch((err) => {
+      console.log("ERROR: " + err);
+    });
+}
+
+
+      function volver() {
+        window.location.href = "index.html";
+      }
+    </script>
+  </body>
+</html>

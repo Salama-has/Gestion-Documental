@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Blog</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"
+      defer
+    ></script>
+    <script src="./js/AutoresCrud.js" defer></script>
+    <script src="./js/Variables.js" defer></script>
+    <link rel="stylesheet" href="./css/estilos.css" />
+  </head>
+  <script>
+    function volver() {
+      window.location.href = "index.html";
+    }
+  </script>
+  <body>
+    <main>
+      <header class="cabecera">
+        <img id="imagenTitulo" src="" alt="" title="" />
+        <h1 id="titulo">Tabla Autores</h1>
+      </header>
+      <div id="menu">
+        <ul>
+          <li>
+            <input type="button" id="bGrabar" value="Nuevo registro" />
+          </li>
+          <li>
+            <input type="button" id="bModificar" value="Modificar registro" />
+          </li>
+          <li>
+            <input type="button" id="bBorrar" value="Borrar registro" />
+          </li>
+          <li>
+            <input type="button" id="bPrimero" value="Visualizar primero" />
+          </li>
+          <li>
+            <input type="button" id="bUltimo" value="Visualizar último" />
+          </li>
+          <li>
+            <input type="button" id="bSiguiente" value="Siguiente" />
+          </li>
+          <li>
+            <input type="button" id="bAnterior" value="Anterior" />
+          </li>
+          <li>
+            <input
+              type="button"
+              id="bVolver"
+              value="Volver"
+              onclick="volver()"
+            />
+          </li>
+        </ul>
+      </div>
+      <div id="principal">
+        <div id="datosdelejercicio">
+          <form metod="post" name="form" id="form">
+            <div class="contenedor">
+              <div class="row">
+                <div class="col-25">
+                  <label for="iId">Id</label>
+                </div>
+                <div class="col-75">
+                  <input
+                    type="text"
+                    class="campo"
+                    id="iId"
+                    name="iId"
+                    style="width: 100px"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="iAutor">Nombre Autor</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" class="campo" id="iAutor" name="iAutor" />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Tabla Blog</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"
+      defer
+    ></script>
+    <script src="./js/BlogSiteCrud.js" defer></script>
+    <script src="./js/Variables.js" defer></script>
+    <link rel="stylesheet" href="./css/estilos.css" />
+  </head>
+  <script>
+    function volver() {
+      window.location.href = "index.html";
+    }
+  </script>
+  <body>
+    <main>
+      <header class="cabecera">
+      </header>
+      <div id="menu">
+        <ul>
+          <li>
+            <input type="button" id="bGrabar" value="Nuevo registro" />
+          </li>
+          <li>
+            <input type="button" id="bModificar" value="Modificar registro" />
+          </li>
+          <li>
+            <input type="button" id="bBorrar" value="Borrar registro" />
+          </li>
+          <li>
+            <input type="button" id="bPrimero" value="Visualizar primero" />
+          </li>
+          <li>
+            <input type="button" id="bUltimo" value="Visualizar último" />
+          </li>
+          <li>
+            <input type="button" id="bSiguiente" value="Siguiente" />
+          </li>
+          <li>
+            <input type="button" id="bAnterior" value="Anterior" />
+          </li>
+          <li>
+            <input type="button" id="bDocumento" value="Documento" />
+          </li>
+          <li>
+            <input
+              type="button"
+              id="bVolver"
+              value="Volver"
+              onclick="volver()"
+            />
+          </li>
+        </ul>
+      </div>
+      <div id="principal">
+        <div id="datosdelejercicio">
+          <form metod="post" name="form" id="form">
+            <div class="contenedor">
+              <div class="row">
+                <div class="col-25">
+                  <label for="iId">Id</label>
+                </div>
+                <div class="col-75">
+                  <input
+                    type="text"
+                    class="campo"
+                    id="iId"
+                    name="iId"
+                    style="width: 100px"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="iTitulo">Titulo</label>
+                </div>
+                <div class="col-75">
+                  <input
+                    type="text"
+                    class="campo"
+                    id="iTitulo"
+                    name="iTitulo"
+                    style="width: 200px"
+                    value=""
+                    required
+                    pattern="[A-Za-z\s]{3,}"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="iCategoria">Categoria</label>
+                </div>
+                <div class="col-75">
+                  <select
+                    id="iCategoria"
+                    class="campo"
+                    name="iCategoria"
+                  ></select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="iFecha">Fecha De Publicacion</label>
+                </div>
+                <div class="col-75">
+                  <input
+                    type="date"
+                    class="campo"
+                    id="iFecha"
+                    name="iFecha"
+                    value=""
+                    required
+                    max="2023-03-03"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="iAutor">Autor</label>
+                </div>
+                <div class="col-75">
+                  <select id="iAutor" class="campo" name="iAutor"></select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="iTag">Tag</label>
+                </div>
+                <div class="col-75">
+                  <select id="iTag" class="campo" name="iTag"></select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="iTag">File</label>
+                </div>
+                <div class="col-75" id="changed">
+                  <input class="campo" type="file" id="ifilePut" name="ifile" />
+                  <span id="nombreFicheroLeido"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="iContenido">Contenido</label>
+                </div>
+                <div class="col-75">
+                  <textarea
+                    type="text"
+                    class="campo"
+                    id="iContenido"
+                    name="iContenido"
+                    style="width: 500px"
+                  >
+                  </textarea>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
